@@ -25,7 +25,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(0);
 
   for (let i = 0; i < grid.length; i++) {
     grid[i].display();
