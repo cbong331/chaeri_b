@@ -1,0 +1,66 @@
+let face;
+let eyeOffsetX = 0;
+let eyeOffsetY = 0;
+let hairStrands = [];
+
+function setup() {
+  createCanvas(400, 400);
+  face = new CuteFace(width / 2, height / 2, 100);
+}
+
+function draw() {
+  background(220);
+  updateEyePosition();
+  face.display();
+  drawHairStrands();
+}
+
+function updateEyePosition() {
+  // Calculate the offset for the eyes based on mouse position
+  eyeOffsetX = map(mouseX, 0, width, -10, 10);
+  eyeOffsetY = map(mouseY, 0, height, -10, 10);
+}
+
+function drawHairStrands() {
+  // Check if the mouse is in the upper half of the face
+  if (mouseY < height / 2) {
+    // Create a new hair strand at a random position in the upper half
+    let x = random(width / 2 - face.size / 2, width / 2 + face.size / 2);
+    let y = random(0, height / 2 - face.size / 2);
+    hairStrands.push(createVector(x, y));
+  }
+
+  // Draw the hair strands
+  stroke(0);
+  for (let strand of hairStrands) {
+    line(strand.x, strand.y, strand.x, strand.y + 10);
+  }
+}
+
+class CuteFace {
+  constructor(x, y, size) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+  }
+
+  display() {
+    // Draw the face at the center of the canvas
+    fill(255, 204, 153);
+    ellipse(width / 2, height / 2, this.size);
+
+    // Calculate eye positions relative to the face center
+    let eyeX1 = width / 2 - 20 + eyeOffsetX;
+    let eyeY = height / 2 - 20 + eyeOffsetY;
+    let eyeX2 = width / 2 + 20 + eyeOffsetX;
+
+    // Draw the eyes
+    fill(0);
+    ellipse(eyeX1, eyeY, 20);
+    ellipse(eyeX2, eyeY, 20);
+
+    // Draw the mouth at the center of the face
+    let mouthY = height / 2 + 10;
+    arc(width / 2, mouthY, 60, 30, 0, PI);
+  }
+}
