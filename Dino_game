@@ -1,0 +1,111 @@
+let dino;
+let obstacles = [];
+let isJumping = false;
+
+function setup() {
+  console.log("setup");
+  createCanvas(600, 400);
+  dino = new Dinosaur();
+}
+
+function draw() {
+  background(100000);
+  console.log(frameCount);
+  // Handle dino jumping
+  if (isJumping) {
+    dino.jump();
+  }
+
+  // Update and display the dino
+  dino.update();
+  dino.show();
+
+  // Create new obstacles
+  if (frameCount % 60 == 0) {
+    let obstacle = new Obstacle();
+    obstacles.push(obstacle);
+  }
+
+  // Update and display obstacles
+  for (let i = obstacles.length - 1; i >= 0; i--) {
+    obstacles[i].update();
+    obstacles[i].show();
+    if (obstacles[i].hits(dino)) {
+      console.log("Game Over!");
+      noLoop();
+    }
+    if (obstacles[i].offscreen()) {
+      obstacles.splice(i, 1);
+    }
+  }
+}
+
+function keyPressed() {
+  if (key == " " && !isJumping) {
+    isJumping = true;
+    dino.jump();
+  }
+}
+
+class Dinosaur {
+  constructor() {
+    this.x = 50;
+    this.y = height;
+    this.gravity = 0.6;
+    this.velocity = 0;
+    this.jumpHeight = 15;
+    this.img = dino
+
+  }
+
+  jump() {
+    if (this.y == height) {
+      this.velocity = -this.jumpHeight;
+    }
+  }
+
+  update() {
+    this.velocity += this.gravity;
+    this.y += this.velocity;
+
+    if (this.y > height) {
+      this.y = height;
+      isJumping = false;
+    }
+  }
+
+  show() {
+    fill(0);
+    rect(this.x, this.y, 30, 30);
+  }
+}
+
+class Obstacle {
+  constructor() {
+    this.x = width;
+    this.w = 20;
+    this.h = random(20, 70);
+    this.speed = 3;
+  }
+
+  update() {
+    this.x = this.x - this.speed;
+  }
+
+  show() {
+    fill(0, 150, 0);
+    rect(this.x, height - this.h, this.w, this.h);
+  }
+
+  offscreen() {
+    return this.x < -this.w;
+  }
+
+  hits(dino) {
+    return (
+      dino.x + 20 > this.x &&
+      dino.x < this.x + this.w &&
+      dino.y + 30 > height - this.h
+    );
+  }
+}
