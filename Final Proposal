@@ -1,0 +1,37 @@
+Interactive New Year's Fortune Gacha
+
+**Objective:**
+
+Create a compact and interactive New Year's gacha machine using Arduino, Adafruit Trellis, Matter.js, p5.js, a toggle switch, LED, and physical gacha balls.
+
+**Who:**
+Yuri, Hyeona, Minji, Chaeri
+
+**Week 1: Setup and Integration**
+
+- Project research and materials research: https://learn.adafruit.com/adafruit-trellis-diy-open-source-led-keypad
+- Set up the development environment for Arduino, p5.js and Matter.js.
+- Connect Adafruit Trellis, toggle switch, and LED to Arduino.
+- Develop basic code to control LED with toggle switch.
+- Implement p5.js and Matter.js for gacha ball simulation on the screen.
+
+**Week 2: Simulation and Interaction**
+
+- Construct a simple cardboard gacha box for physical interaction with laser cutting machine/ 
+- Integrate Adafruit Trellis for user input.
+- *Maybe* Integrate a sound during gacha ball animation. 
+- Combine all elements to display a personalized New Year's fortune.
+
+**Challenges:**
+
+- Software integration with p5.js and Matter.js
+- Software & hardware integration with animation and Trellis in arduino circuit. 
+- Smooth coordination of the exerpience.
+
+**Assistance Needed:**
+
+- Troubleshooting hardware integration.
+- Any software bugs.
+- Verifying user input recognition.
+
+We want to deliver a fun and interactive New Year's experience, with a theme around New Years and surprise.
